@@ -1,19 +1,19 @@
 experiment_name: leaf_class
-suffix: '1'
+suffix: 'pretrained_2_resume'
 
-device_id: [0]
+device_id: [7,8]
 
 model: resnet18
-pretrained: False
+pretrained: True
 
-epochs: 50
-batch_size: 128
-learning_rate: 0.01
+epochs: 300
+batch_size: 512
+learning_rate: 0.000005
 num_classes: 176
 
 weight_decay: 0.0001
 
-resume: False
-checkpoint_path: None
+resume: True
+checkpoint_path: 'logs/leaf_class_resnet18_pretrained_2_resume/model150.pth'
 
-save_interval: 5
+save_interval: 10

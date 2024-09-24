@@ -16,9 +16,9 @@ def train(config):
     train_transforms = transforms.Compose([
         transforms.RandomVerticalFlip(),
         transforms.RandomHorizontalFlip(),
-        # transforms.RandomRotation(20),
+        transforms.RandomRotation(40,fill=(255,)),
         # transforms.RandomResizedCrop(224),
-        transforms.ColorJitter(brightness=0.1, contrast=0.1, saturation=0.1, hue=0.1),
+        transforms.ColorJitter(brightness=0.3, contrast=0.1, saturation=0.1, hue=0.1),
         transforms.Resize((224,224)),
         transforms.ToTensor(),
     ])
@@ -44,8 +44,10 @@ def train(config):
     else:
         device = [torch.device('cpu')]
     print(f'Using {device} device')
+    model = model.to(device[0])
     if len(device) > 1:
-        model = nn.DataParallel(model, device_ids=config['device_id'])
+        print('Using DataParallel')
+        model = nn.DataParallel(model, device_ids=device)
     else:
         model = model.to(device[0])
 
